@@ -25,6 +25,10 @@ jobs:
       
       - name: Publish .NET Core Project
         run: dotnet publish WavesSpy.sln -c Release --output release --nologo
+        
+      # changes the base-tag in index.html from '/' to 'waves-spy' to match GitHub Pages repository subdirectory
+      - name: Change base-tag in index.html from / to waves-spy
+        run: sed -i 's/<base href="\/" \/>/<base href="\/waves-spy\/" \/>/g' release/wwwroot/index.html
       
       - name: Uploading files to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4.4.0
