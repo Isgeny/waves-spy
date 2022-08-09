@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@using VisNetwork.Blazor.Models
 
 <PageTitle>Counter</PageTitle>
 
@@ -6,12 +7,35 @@
 
 <p role="status">Current count: @currentCount</p>
 
+<Network Id="my-id" Data="@data"/>
+
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
     private int currentCount = 0;
 
-    private void IncrementCount()
+    private NetworkData data = new()
+    {
+        Nodes = new[]
+        {
+            new Node { Id = "1", Label = "A" },
+            new Node { Id = "2", Label = "B" },
+            new Node { Id = "3", Label = "C" },
+            new Node { Id = "4", Label = "D" },
+        },
+        Edges = new[]
+        {
+            new Edge { From = "1", To = "2" },
+            new Edge { From = "1", To = "3" },
+            new Edge { From = "2", To = "4" },
+            new Edge { From = "3", To = "4" },
+            new Edge { From = "4", To = "2" },
+            new Edge { From = "4", To = "3" },
+        },
+    };
+
+    private
+        void IncrementCount()
     {
         currentCount++;
     }
