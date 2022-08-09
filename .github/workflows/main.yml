@@ -29,6 +29,10 @@ jobs:
       # changes the base-tag in index.html from '/' to 'waves-spy' to match GitHub Pages repository subdirectory
       - name: Change base-tag in index.html from / to waves-spy
         run: sed -i 's/<base href="\/" \/>/<base href="\/waves-spy\/" \/>/g' release/wwwroot/index.html
+        
+      # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+      - name: Add .nojekyll file
+        run: touch release/wwwroot/.nojekyll
       
       - name: Uploading files to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4.4.0
